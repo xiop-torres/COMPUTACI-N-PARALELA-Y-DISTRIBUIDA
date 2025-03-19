@@ -1,0 +1,125 @@
+--------------------------------------------------------------------------------
+Profile data file 'callgrind.out' (creator: callgrind-3.22.0)
+--------------------------------------------------------------------------------
+I1 cache: 32768 B, 64 B, 8-way associative
+D1 cache: 32768 B, 64 B, 8-way associative
+LL cache: 16777216 B, 64 B, direct-mapped
+Timerange: Basic block 0 - 273540123
+Trigger: Program termination
+Profiled target:  ./multiplicacion (PID 2947, part 1)
+Events recorded:  Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Events shown:     Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Event sort order: Ir Dr Dw I1mr D1mr D1mw ILmr DLmr DLmw
+Thresholds:       99 0 0 0 0 0 0 0 0
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                     Dr                   Dw                   I1mr           D1mr                 D1mw             ILmr           DLmr           DLmw             
+--------------------------------------------------------------------------------
+2,325,751,651 (100.0%) 816,953,983 (100.0%) 139,257,576 (100.0%) 2,434 (100.0%) 219,725,414 (100.0%) 167,900 (100.0%) 2,226 (100.0%) 7,253 (100.0%) 101,146 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                     Dr                   Dw                   I1mr        D1mr                 D1mw             ILmr        DLmr           DLmw             file:function
+--------------------------------------------------------------------------------
+1,210,321,424 (52.04%) 402,654,213 (49.29%) 134,479,876 (96.57%)  3 ( 0.12%) 201,294,867 (91.61%)  32,896 (19.59%)  3 ( 0.13%)    13 ( 0.18%)      .           Multi_Clasica_Bloques.cpp:matrixClasica(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > const&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > const&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, int) [/home/xioma/multiplicacion/multiplicacion]
+1,097,047,455 (47.17%) 406,950,263 (49.81%)   4,194,971 ( 3.01%)  7 ( 0.29%)  18,386,980 ( 8.37%)       0           7 ( 0.31%)    35 ( 0.48%)      .           Multi_Clasica_Bloques.cpp:matrixBloques(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > const&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > const&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, int, int) [/home/xioma/multiplicacion/multiplicacion]
+
+--------------------------------------------------------------------------------
+-- Auto-annotated source: Multi_Clasica_Bloques.cpp
+--------------------------------------------------------------------------------
+Ir                   Dr                   Dw                   I1mr       D1mr                 D1mw            ILmr       DLmr        DLmw 
+
+-- line 4 ----------------------------------------
+          .                    .                    .          .                    .               .          .           .          .           
+          .                    .                    .          .                    .               .          .           .          .           using namespace std;
+          .                    .                    .          .                    .               .          .           .          .           
+          .                    .                    .          .                    .               .          .           .          .           const int SIZE = 512;  // Ajusta según el análisis
+          .                    .                    .          .                    .               .          .           .          .           const int BLOCK_SIZE = 64;  // Ajusta según el análisis
+          .                    .                    .          .                    .               .          .           .          .           
+          .                    .                    .          .                    .               .          .           .          .           void matrixClasica(const vector<vector<double>>& A,
+          .                    .                    .          .                    .               .          .           .          .               const vector<vector<double>>& B,
+          9 ( 0.00%)           0                    4 ( 0.00%) 1 ( 0.04%)           0               0          1 ( 0.04%)  .          .               vector<vector<double>>& C, int size) {
+      1,538 ( 0.00%)           .                    .          .                    .               .          .           .          .               for (int i = 0; i < size; ++i) {
+  1,049,600 ( 0.05%)       1,024 ( 0.00%)           0          1 ( 0.04%)       1,023 ( 0.00%)      0          1 ( 0.04%)  .          .                   for (int j = 0; j < size; ++j) {
+  1,048,576 ( 0.05%)           0              262,144 ( 0.19%) 0                    0          32,896 (19.59%) .           .          .                       C[i][j] = 0;
+537,133,056 (23.10%)           .                    .          .                    .               .          .           .          .                       for (int k = 0; k < size; ++k) {
+671,088,640 (28.85%) 402,653,184 (49.29%) 134,217,728 (96.38%) 1 ( 0.04%) 201,293,843 (91.61%)      0          1 ( 0.04%) 13 ( 0.18%) .                           C[i][j] += A[i][k] * B[k][j];
+          .                    .                    .          .                    .               .          .           .          .                       }
+          .                    .                    .          .                    .               .          .           .          .                   }
+          .                    .                    .          .                    .               .          .           .          .               }
+          5 ( 0.00%)           5 ( 0.00%)           0          0                    1 ( 0.00%)      .          .           .          .           }
+          .                    .                    .          .                    .               .          .           .          .           
+          .                    .                    .          .                    .               .          .           .          .           void matrixBloques(const vector<vector<double>>& A,
+          .                    .                    .          .                    .               .          .           .          .               const vector<vector<double>>& B,
+         10 ( 0.00%)           0                    9 ( 0.00%) 2 ( 0.08%)           0               0          2 ( 0.09%)  .          .               vector<vector<double>>& C, int size, int blockSize) {
+        118 ( 0.00%)          48 ( 0.00%)          10 ( 0.00%) 2 ( 0.08%)           0               0          2 ( 0.09%)  .          .               for (int ii = 0; ii < size; ii += blockSize) {
+        792 ( 0.00%)         320 ( 0.00%)         136 ( 0.00%) .                    .               .          .           .          .                   for (int jj = 0; jj < size; jj += blockSize) {
+      3,072 ( 0.00%)       1,536 ( 0.00%)         512 ( 0.00%) .                    .               .          .           .          .                       for (int kk = 0; kk < size; kk += blockSize) {
+    101,888 ( 0.00%)      35,328 ( 0.00%)           0          1 ( 0.04%)         731 ( 0.00%)      0          1 ( 0.04%)  .          .                           for (int i = ii; i < min(ii + blockSize, size); ++i) {
+  6,422,528 ( 0.28%)      65,536 ( 0.01%)           .          .                    .               .          .           .          .                               for (int j = jj; j < min(jj + blockSize, size); ++j) {
+  6,291,456 ( 0.27%)           0            2,097,152 ( 1.51%) 1 ( 0.04%)           0               0          1 ( 0.04%)  .          .                                   double sum = 0;
+543,162,368 (23.35%)   2,097,152 ( 0.26%)           .          .                    .               .          .           .          .                                   for (int k = kk; k < min(kk + blockSize, size); ++k) {
+536,870,912 (23.08%) 402,653,184 (49.29%)           0          1 ( 0.04%)  18,100,766 ( 8.24%)      0          1 ( 0.04%) 35 ( 0.48%) .                                       sum += A[i][k] * B[k][j];
+          .                    .                    .          .                    .               .          .           .          .                                   }
+  4,194,304 ( 0.18%)   2,097,152 ( 0.26%)   2,097,152 ( 1.51%) 0              285,483 ( 0.13%)      .          .           .          .                                   C[i][j] += sum;
+          .                    .                    .          .                    .               .          .           .          .                               }
+          .                    .                    .          .                    .               .          .           .          .                           }
+          .                    .                    .          .                    .               .          .           .          .                       }
+          .                    .                    .          .                    .               .          .           .          .                   }
+          .                    .                    .          .                    .               .          .           .          .               }
+          7 ( 0.00%)           7 ( 0.00%)           .          .                    .               .          .           .          .           }
+          .                    .                    .          .                    .               .          .           .          .           
+         11 ( 0.00%)           1 ( 0.00%)           7 ( 0.00%) 1 ( 0.04%)           0               0          1 ( 0.04%)  .          .           int main() {
+         21 ( 0.00%)           1 ( 0.00%)           6 ( 0.00%) 2 ( 0.08%)           1 ( 0.00%)      0          2 ( 0.09%)  1 ( 0.01%) .               vector<vector<double>> A(SIZE, vector<double>(SIZE, 1.0));
+    329,237 ( 0.01%)      90,308 ( 0.01%)      80,775 ( 0.06%) 16 ( 0.66%)         100 ( 0.00%) 33,106 (19.72%) 16 ( 0.72%)  0          33,089 (32.71%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >::vector(unsigned long, std::vector<double, std::allocator<double> > const&, std::allocator<std::vector<double, std::allocator<double> > > const&) (1x)
+      1,502 ( 0.00%)          44 ( 0.00%)         542 ( 0.00%) 6 ( 0.25%)           1 ( 0.00%)     64 ( 0.04%) 6 ( 0.27%)  0          64 ( 0.06%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::vector(unsigned long, double const&, std::allocator<double> const&) (1x)
+      1,620 ( 0.00%)         574 ( 0.00%)         300 ( 0.00%) 23 ( 0.94%)          77 ( 0.00%)     19 ( 0.01%) 22 ( 0.99%)  3 ( 0.04%) .           => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::~vector() (1x)
+         15 ( 0.00%)           1 ( 0.00%)           4 ( 0.00%) 1 ( 0.04%)           1 ( 0.00%)      1 ( 0.00%) 1 ( 0.04%)  1 ( 0.01%) .               vector<vector<double>> B(SIZE, vector<double>(SIZE, 1.0));
+    329,088 ( 0.01%)      90,267 ( 0.01%)      80,753 ( 0.06%) 0                   93 ( 0.00%) 33,105 (19.72%) 0           0          33,088 (32.71%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >::vector(unsigned long, std::vector<double, std::allocator<double> > const&, std::allocator<std::vector<double, std::allocator<double> > > const&) (1x)
+      1,484 ( 0.00%)          45 ( 0.00%)         542 ( 0.00%) 3 ( 0.12%)           0               0          3 ( 0.13%)  .          .           => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::vector(unsigned long, double const&, std::allocator<double> const&) (1x)
+        186 ( 0.00%)          53 ( 0.00%)          30 ( 0.00%) 0                    5 ( 0.00%)      .          .           .          .           => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::~vector() (1x)
+         13 ( 0.00%)           0                    4 ( 0.00%) 0                    0               1 ( 0.00%) .           .          .               vector<vector<double>> C(SIZE, vector<double>(SIZE, 0.0));
+    329,237 ( 0.01%)      90,308 ( 0.01%)      80,775 ( 0.06%) 0                   99 ( 0.00%) 33,105 (19.72%) 0           0          33,088 (32.71%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >::vector(unsigned long, std::vector<double, std::allocator<double> > const&, std::allocator<std::vector<double, std::allocator<double> > > const&) (1x)
+      1,484 ( 0.00%)          45 ( 0.00%)         542 ( 0.00%) .                    .               .          .           .          .           => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::vector(unsigned long, double const&, std::allocator<double> const&) (1x)
+        186 ( 0.00%)          53 ( 0.00%)          30 ( 0.00%) 0                    5 ( 0.00%)      .          .           .          .           => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::~vector() (1x)
+          .                    .                    .          .                    .               .          .           .          .           
+          .                    .                    .          .                    .               .          .           .          .               // Medición para matriz clásica
+          2 ( 0.00%)           0                    1 ( 0.00%) 1 ( 0.04%)           0               0          1 ( 0.04%)  .          .               auto start1 = chrono::high_resolution_clock::now();
+        857 ( 0.00%)         296 ( 0.00%)         137 ( 0.00%) 7 ( 0.29%)          67 ( 0.00%)     20 ( 0.01%) 7 ( 0.31%)  7 ( 0.10%) .           => ???:0x0000000000109170 (1x)
+          5 ( 0.00%)           1 ( 0.00%)           1 ( 0.00%) 0                    1 ( 0.00%)      .          .           .          .               matrixClasica(A, B, C, SIZE);
+1,210,322,965 (52.04%) 402,654,216 (49.29%) 134,479,876 (96.57%) 3 ( 0.12%) 201,294,867 (91.61%) 32,896 (19.59%) 3 ( 0.13%) 13 ( 0.18%) .           => Multi_Clasica_Bloques.cpp:matrixClasica(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > const&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > const&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, int) (1x)
+          2 ( 0.00%)           0                    1 ( 0.00%) .                    .               .          .           .          .               auto end1 = chrono::high_resolution_clock::now();
+         31 ( 0.00%)          12 ( 0.00%)           3 ( 0.00%) 0                    5 ( 0.00%)      0          0           1 ( 0.01%) .           => ???:0x0000000000109170 (1x)
+          4 ( 0.00%)           0                    1 ( 0.00%) .                    .               .          .           .          .               cout << "Tiempo de ejecucion Clasica: "
+      5,837 ( 0.00%)       1,744 ( 0.00%)         861 ( 0.00%) 75 ( 3.08%)         128 ( 0.00%)     33 ( 0.02%) 70 ( 3.14%) 19 ( 0.26%) .           => ???:0x00000000001091d0 (1x)
+          3 ( 0.00%)           0                    1 ( 0.00%) .                    .               .          .           .          .                   << chrono::duration<double, milli>(end1 - start1).count() << " ms" << endl;
+        289 ( 0.00%)          83 ( 0.00%)          48 ( 0.00%) 1 ( 0.04%)           0               0          1 ( 0.04%)  .          .           => ???:0x00000000001091d0 (1x)
+          .                    .                    .          .                    .               .          .           .          .           
+          .                    .                    .          .                    .               .          .           .          .               // Reiniciar C
+          8 ( 0.00%)           0                    3 ( 0.00%) 2 ( 0.08%)           0               1 ( 0.00%) 2 ( 0.09%)  .          .               fill(C.begin(), C.end(), vector<double>(SIZE, 0.0));
+      1,582 ( 0.00%)          56 ( 0.00%)         554 ( 0.00%) 11 ( 0.45%)           3 ( 0.00%)     66 ( 0.04%) 4 ( 0.18%)  0          64 ( 0.06%)  => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::vector(unsigned long, double const&, std::allocator<double> const&) (1x)
+        170 ( 0.00%)          50 ( 0.00%)          25 ( 0.00%) 10 ( 0.41%)          15 ( 0.00%)      2 ( 0.00%) 1 ( 0.04%)  .          .           => /usr/include/c++/13/bits/stl_vector.h:std::vector<double, std::allocator<double> >::~vector() (1x)
+          .                    .                    .          .                    .               .          .           .          .           
+          .                    .                    .          .                    .               .          .           .          .               // Medición para matriz por bloques
+          2 ( 0.00%)           0                    1 ( 0.00%) .                    .               .          .           .          .               auto start2 = chrono::high_resolution_clock::now();
+         31 ( 0.00%)          12 ( 0.00%)           3 ( 0.00%) 3 ( 0.12%)           4 ( 0.00%)      .          .           .          .           => ???:0x0000000000109170 (1x)
+          6 ( 0.00%)           2 ( 0.00%)           1 ( 0.00%) 1 ( 0.04%)           1 ( 0.00%)      0          1 ( 0.04%)  .          .               matrixBloques(A, B, C, SIZE, BLOCK_SIZE);
+1,111,933,647 (47.81%) 413,341,639 (50.60%)   4,229,427 ( 3.04%) 10 ( 0.41%)  18,414,360 ( 8.38%)      0          10 ( 0.45%) 35 ( 0.48%) .           => Multi_Clasica_Bloques.cpp:matrixBloques(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > const&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > > const&, std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, int, int) (1x)
+          2 ( 0.00%)           0                    1 ( 0.00%) .                    .               .          .           .          .               auto end2 = chrono::high_resolution_clock::now();
+         31 ( 0.00%)          12 ( 0.00%)           3 ( 0.00%) 0                    5 ( 0.00%)      0          0           1 ( 0.01%) .           => ???:0x0000000000109170 (1x)
+          4 ( 0.00%)           0                    1 ( 0.00%) .                    .               .          .           .          .               cout << "Tiempo de ejecucion Bloques: "
+        412 ( 0.00%)         109 ( 0.00%)          48 ( 0.00%) 3 ( 0.12%)          20 ( 0.00%)      5 ( 0.00%) 0           4 ( 0.06%) .           => ???:0x00000000001091d0 (1x)
+          3 ( 0.00%)           0                    1 ( 0.00%) 1 ( 0.04%)           0               0          1 ( 0.04%)  .          .                   << chrono::duration<double, milli>(end2 - start2).count() << " ms" << endl;
+        289 ( 0.00%)          83 ( 0.00%)          48 ( 0.00%) .                    .               .          .           .          .           => ???:0x00000000001091d0 (1x)
+          .                    .                    .          .                    .               .          .           .          .           
+          .                    .                    .          .                    .               .          .           .          .               return 0;
+         18 ( 0.00%)          11 ( 0.00%)           3 ( 0.00%) 1 ( 0.04%)           4 ( 0.00%)      0          1 ( 0.04%)  .          .           }
+    388,067 ( 0.02%)     116,154 ( 0.01%)      57,965 ( 0.04%) 14 ( 0.58%)       2,142 ( 0.00%)      4 ( 0.00%) 7 ( 0.31%)  .          .           => /usr/include/c++/13/bits/stl_vector.h:std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >::~vector() (3x)
+
+--------------------------------------------------------------------------------
+Ir                     Dr                   Dw                   I1mr        D1mr                 D1mw            ILmr        DLmr        DLmw 
+--------------------------------------------------------------------------------
+2,307,368,998 (99.21%) 809,604,493 (99.10%) 138,674,884 (99.58%) 20 ( 0.82%) 219,681,855 (99.98%) 32,899 (19.59%) 20 ( 0.90%) 50 ( 0.69%) .           events annotated
+

@@ -1,0 +1,76 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+const SIZE = 256     
+const BLOCK_SIZE = 32  
+
+func minInt(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
+
+// Multiplicación de matrices clásica
+func matrixClasica(A, B, C [][]float64, size int) {
+	for i := 0; i < size; i++ {
+		for j := 0; j < size; j++ {
+			C[i][j] = 0
+			for k := 0; k < size; k++ {
+				C[i][j] += A[i][k] * B[k][j]
+			}
+		}
+	}
+}
+
+// Multiplicación de matrices por bloques
+func matrixBloques(A, B, C [][]float64, size, blockSize int) {
+	for ii := 0; ii < size; ii += blockSize {
+		for jj := 0; jj < size; jj += blockSize {
+			for kk := 0; kk < size; kk += blockSize {
+				for i := ii; i < minInt(ii+blockSize, size); i++ {
+					for j := jj; j < minInt(jj+blockSize, size); j++ {
+						sum := 0.0
+						for k := kk; k < minInt(kk+blockSize, size); k++ {
+							sum += A[i][k] * B[k][j]
+						}
+						C[i][j] += sum
+					}
+				}
+			}
+		}
+	}
+}
+
+// Inicializa matrices con valores 1.0
+func initializeMatrix(size int) [][]float64 {
+	matrix := make([][]float64, size)
+	for i := range matrix {
+		matrix[i] = make([]float64, size)
+		for j := range matrix[i] {
+			matrix[i][j] = 1.0
+		}
+	}
+	return matrix
+}
+
+func main() {
+	A := initializeMatrix(SIZE)
+	B := initializeMatrix(SIZE)
+	C := initializeMatrix(SIZE)
+
+	start1 := time.Now()
+	matrixClasica(A, B, C, SIZE)
+	fmt.Printf("Tiempo de ejecución Clásica: %.2f ms\n", float64(time.Since(start1).Milliseconds()))
+
+	// Reiniciar C
+	C = initializeMatrix(SIZE)
+
+	start2 := time.Now()
+	matrixBloques(A, B, C, SIZE, BLOCK_SIZE)
+	fmt.Printf("Tiempo de ejecución Bloques: %.2f ms\n", float64(time.Since(start2).Milliseconds()))
+}

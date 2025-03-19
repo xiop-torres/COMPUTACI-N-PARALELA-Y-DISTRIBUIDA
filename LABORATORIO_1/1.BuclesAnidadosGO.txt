@@ -1,0 +1,51 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
+
+const MAX = 1000
+
+func main() {
+	// Definir la matriz A como un slice unidimensional para mejorar la localidad en caché
+	A := make([]float64, MAX*MAX)
+	x := make([]float64, MAX)
+	y := make([]float64, MAX)
+
+	// Inicializar A y x con valores aleatorios entre 0 y 1
+	rand.Seed(time.Now().UnixNano())
+
+	for i := 0; i < MAX; i++ {
+		for j := 0; j < MAX; j++ {
+			A[i*MAX+j] = rand.Float64() // Valor aleatorio entre 0 y 1
+		}
+		x[i] = rand.Float64()
+	}
+
+	// Primer par de bucles
+	start1 := time.Now()
+	for i := 0; i < MAX; i++ {
+		for j := 0; j < MAX; j++ {
+			y[i] += A[i*MAX+j] * x[j]
+		}
+	}
+	elapsed1 := time.Since(start1)
+	fmt.Printf("Tiempo de ejecucion del primer par de bucles: %.2f ms\n", elapsed1.Seconds()*1000)
+
+	// Resetear y a ceros
+	for i := range y {
+		y[i] = 0.0
+	}
+
+	// Segundo par de bucles
+	start2 := time.Now()
+	for j := 0; j < MAX; j++ {
+		for i := 0; i < MAX; i++ {
+			y[i] += A[i*MAX+j] * x[j]
+		}
+	}
+	elapsed2 := time.Since(start2)
+	fmt.Printf("Tiempo de ejecucion del segundo par de bucles: %.2f ms\n", elapsed2.Seconds()*1000)
+}
